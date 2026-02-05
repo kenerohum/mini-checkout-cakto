@@ -34,6 +34,8 @@ export async function GET(request: Request, context: Context) {
     );
   }
 
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  
   return NextResponse.json({
     order: { ...order, products }
   });

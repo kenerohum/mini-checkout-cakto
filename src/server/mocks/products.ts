@@ -21,5 +21,15 @@ export const productsMock: Product[] = [
     producer: "João Silva",
     format: "digital",
     deliveryTime: "imediato",
+  },
+  {
+    id: 2,
+    orderUid: "qwert",
+    name: "1 Mês de Consultoria em Marketing",
+    originalPrice: 155.0,
+    currentPrice: 0.0,
+    producer: "João Silva",
+    format: "digital",
+    deliveryTime: "imediato",
   }
 ]
