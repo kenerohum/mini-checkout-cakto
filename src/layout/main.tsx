@@ -1,11 +1,12 @@
 'use client';
 
-import useOrder from "@/contexts/use-order";
+import useOrder from "@/contexts/useOrder";
 import Cart from "@/layout/cart";
 import { useEffect } from "react";
 import Form from "./form";
 import PaymentsMethods from "./paymentsMethods";
-import usePayment from "@/contexts/use-payment";
+import usePayment from "@/contexts/usePayment";
+import Payment from "./payment";
 
 export default function Main({
   order,
@@ -24,6 +25,7 @@ export default function Main({
       <Cart />
       <Form/>
       <PaymentsMethods/>
+      <Payment/>
     </div>
   );
 }

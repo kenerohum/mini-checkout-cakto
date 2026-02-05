@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 interface SelectOption {
     value: string;
@@ -11,18 +12,22 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
 }
 
 export default function Select({
-    options, placeholder,...props
+    options, placeholder, className, ...props
 }: SelectProps) {
 
 
     return (
+
         <select
-            className="border border-gray-300 rounded px-3 py-2"
+            className={twMerge([
+                "h-12 w-full border-border-background border rounded-lg px-3 py-2 gap-1 text-md text-foreground focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all bg-secondary-background ring-0 outline-0",
+                className
+            ])}
             {...props}
         >
-            <option value="">{placeholder}</option>
+            <option className='bg-background text-foreground' value="">{placeholder}</option>
             {options.map((option) => (
-                <option key={option.value} value={option.value}>
+                <option className='bg-background text-foreground' key={option.value} value={option.value}>
                     {option.label}
                 </option>
             ))}

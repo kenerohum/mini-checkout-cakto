@@ -1,8 +1,8 @@
 'use client';
 
 import Product from "@/components/product";
-import useOrder from "@/contexts/use-order";
-import usePayment from "@/contexts/use-payment";
+import useOrder from "@/contexts/useOrder";
+import usePayment from "@/contexts/usePayment";
 import { calcTotal, formatCurrency } from "@/utils/calcAmount";
 
 export default function Cart() {

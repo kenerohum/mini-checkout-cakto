@@ -12,7 +12,8 @@ export default function Button({ children, iconStart, iconEnd, className, ...pro
     return (
         <button
             className={twMerge([
-                "flex h-12 w-full items-center justify-center gap-2 px-5 rounded-xl bg-primary text-foreground transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc]",
+                "flex items-center justify-center rounded-xl bg-primary ease-in-out text-foreground transition-colors hover:bg-primary/70 selection:bg-primary/70 font-medium ",
+                "h-12 w-full gap-2 px-5",
                 className,
             ])}
             {...props}

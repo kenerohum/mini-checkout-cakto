@@ -3,10 +3,11 @@
 import Button from "@/components/button";
 import MethodItem from "@/components/methodItem";
 import Product from "@/components/product";
+import Select from "@/components/select";
 import ValueItem from "@/components/valueItem";
-import useOrder from "@/contexts/use-order";
-import usePayment from "@/contexts/use-payment";
-import { calcTotal, formatCurrency } from "@/utils/calcAmount";
+import useOrder from "@/contexts/useOrder";
+import usePayment from "@/contexts/usePayment";
+import { calcInstallment, calcTotal, formatCurrency } from "@/utils/calcAmount";
 
 export default function PaymentsMethods() {
     const { order } = useOrder();
@@ -25,8 +26,12 @@ export default function PaymentsMethods() {
         usePayment.setState({ paymentMethod: method });
     }
 
+    const handlerSelectInstallment = (installmentNumber: number) => {
+        usePayment.setState({ installment: order?.payment.installments.find(e => e.installmentNumber === installmentNumber) || null });
+    }
+
     return (
-        <div className="w-full  mb-20">
+        <div className="w-full">
             <h1 className="mb-3 text-lg font-bold">Métodos de pagamento</h1>
 
 
@@ -46,6 +51,18 @@ export default function PaymentsMethods() {
                 />
             </div>
 
+            {paymentMethod == "card" &&
+                <div className="mb-2">
+                    <p className="text-md mb-1">Parcelamento</p>
+                    <Select
+                        className=""
+                        value={installment?.installmentNumber?.toString()}
+                        onChange={e => handlerSelectInstallment(Number(e.target.value))}
+                        options={order?.payment.installments.map(e => ({ label: `${e.installmentNumber}x ${formatCurrency(calcInstallment(amounts.totalProducts, e.installmentNumber, e.installmentTaxExtra).installmentValue)}`, value: e.installmentNumber?.toString() })) || []}
+                    />
+                </div>
+            }
+
 
             <div className="bg-secondary-background border-border-background border rounded-xl p-5 divide-y divide-border-background">
 
@@ -56,7 +73,7 @@ export default function PaymentsMethods() {
 
                             <ValueItem
                                 label="Valor dos produtos"
-                                value={formatCurrency(amounts.total)}
+                                value={formatCurrency(amounts.totalProducts)}
                             />
                             <ValueItem
                                 label="Taxa Cakto"
@@ -67,7 +84,7 @@ export default function PaymentsMethods() {
                                     Total
                                 </span>
                                 <span className="text-lg font-bold whitespace-nowrap text-foreground">
-                                    {formatCurrency(amounts.total)}
+                                    {formatCurrency(amounts.totalCostumer)}
                                 </span>
                             </div>
                         </div>
@@ -82,16 +99,11 @@ export default function PaymentsMethods() {
                                     {formatCurrency(amounts.sellerReceive)}
                                 </span>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>
             </div>
-
-            <Button className="mt-5">
-                Pagar
-            </Button>
-
         </div>
     );
 }

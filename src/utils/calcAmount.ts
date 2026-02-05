@@ -17,6 +17,16 @@ const calcPercent = (amount: number, percent: number) => {
     return (amount * percent) / 100;
 }
 
+export const calcInstallment = (amount: number, installmentNumber: number, installmentTaxExtra: number) => {
+    const totalInstallmentTax = calcPercent(amount, installmentTaxExtra);
+    const totalAmount = amount + totalInstallmentTax;
+    const installmentValue = totalAmount / installmentNumber;
+    return {
+        totalAmount,
+        installmentValue,
+    };
+}
+
 export const calcTotal = (data: {
     products: { currentPrice: number }[],
     paymentMethod: "pix" | "card",
@@ -28,19 +38,22 @@ export const calcTotal = (data: {
     
     const total = data.products.reduce((total, product) => total + product.currentPrice, 0);
     const pixTax =  calcPercent(total, data.pixTaxPercent);
-    const installmentTax =  calcPercent(total, data.installmentTax) + calcPercent(total, data.installmentTaxExtra);
+    const extraInstallmentTax = calcPercent(total, data.installmentTaxExtra);
+    const installmentTax =  calcPercent(total, data.installmentTax);
 
     let taxCakto = 0;
     if (data.paymentMethod === "pix") {
-        taxCakto = calcPercent(total, data.pixTaxPercent);
+        taxCakto = pixTax;
     } else if (data.paymentMethod === "card") {
-        taxCakto = calcPercent(total, data.installmentTax) + calcPercent(total, data.installmentTaxExtra);
+        taxCakto = installmentTax ;
     }
 
     return {
-        total: total,
-        taxCakto: taxCakto,
+        totalProducts: total,
+        totalCostumer: total + (data.paymentMethod === "card" ? extraInstallmentTax : 0),
+        taxCakto,
         sellerReceive: total - taxCakto,
+        
         pixTax: pixTax,
         installmentTax: installmentTax,
     };

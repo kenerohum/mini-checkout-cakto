@@ -21,9 +21,9 @@ export default function Input({ className, ...props }: InputProps) {
         >
             {props.icon && <Lucide icon={props.icon} />}
             <label htmlFor={props.id} className="text-md mb-1">{props.placeholder}</label>
-            <div className="border-border-background border rounded-md px-3 py-2 gap-1 text-md text-foreground focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all bg-secondary-background">
+            <div className="border-border-background border rounded-lg px-3 py-2 gap-1 text-md text-foreground focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all bg-secondary-background">
                 <input
-                    className="w-full border-0 ring-0 outline-0 bg-transparent p-0 m-0 text-md text-foreground"
+                    className=" w-full border-0 ring-0 outline-0 bg-transparent p-0 m-0 text-md text-foreground"
                     {...props}
                     onChange={(e) => {
                         if (props.mask && MASKS[props.mask]) {
