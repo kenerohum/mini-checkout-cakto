@@ -1,5 +1,6 @@
 "use client";
 
+import { twMerge } from "tailwind-merge";
 import Lucide, { Icons } from "./lucide";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -7,10 +8,13 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   iconEnd?: Icons;  
 }
 
-export function Button({ children, iconStart, iconEnd, ...props }: ButtonProps) {
+export default function Button({ children, iconStart, iconEnd, className, ...props }: ButtonProps) {
     return (
         <button
-            className="flex h-12 w-full items-center justify-center gap-2 px-5 rounded-full bg-primary text-foreground transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc]"
+            className={twMerge([
+                "flex h-12 w-full items-center justify-center gap-2 px-5 rounded-xl bg-primary text-foreground transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc]",
+                className,
+            ])}
             {...props}
         >
             {iconStart && <Lucide icon={iconStart} className="stroke-2"/>}

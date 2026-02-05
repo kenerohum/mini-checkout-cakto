@@ -1,4 +1,4 @@
-import { Button } from "@/components/button";
+import Button from "@/components/button";
 import Lucide from "@/components/lucide";
 import Image from "next/image";
 import Link from "next/link";

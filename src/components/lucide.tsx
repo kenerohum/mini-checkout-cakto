@@ -10,7 +10,7 @@ interface LucideProps extends React.ComponentPropsWithoutRef<"svg"> {
   title?: string;
 }
 
-function Lucide(props: LucideProps) {
+export default function Lucide(props: LucideProps) {
   const { icon, className, ...computedProps } = props;
   const Component = icons[props.icon];
   if (!Component) return null; 
@@ -21,5 +21,3 @@ function Lucide(props: LucideProps) {
     />
   );
 }
-
-export default Lucide;

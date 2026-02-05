@@ -16,5 +16,8 @@ interface IOrder {
     }[]
     taxPixPercent: number;
   },
+  seller: {
+    name: string;
+  }
   products: IProduct[]
 };

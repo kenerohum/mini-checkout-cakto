@@ -1,13 +1,13 @@
 "use client";
 
-import { calcDiscountPercent, formatCurrency } from "@/utils";
+import { calcDiscountPercent, formatCurrency } from "@/utils/calcAmount";
 import Lucide, { Icons } from "./lucide";
 
 interface ProductProps {
     product: IProduct;
 }
 
-export function Product({ product }: ProductProps) {
+export default function Product({ product }: ProductProps) {
     return (
         <div
             className="flex w-full items-center justify-between gap-4 text-foreground transition-colors "
@@ -19,7 +19,7 @@ export function Product({ product }: ProductProps) {
 
                 <div className="flex flex-col items-start">
                     <span className="text-md  text-left text-foreground font-medium">{product.name}</span>
-                    <span className="text-xs  text-left text-text-secondary ">{calcDiscountPercent(product.originalPrice, product.currentPrice)} de desconto</span>
+                    <span className="text-xs  text-left text-primary ">{calcDiscountPercent(product.originalPrice, product.currentPrice)} de desconto</span>
                 </div>
             </div>
             <div className="flex flex-col justify-end items-end">

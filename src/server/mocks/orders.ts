@@ -14,6 +14,9 @@ export type Order = {
     }[]
     taxPixPercent: number;
   },
+  seller: {
+    name: string;
+  }
   products: Product[]
 };
 
@@ -87,6 +90,9 @@ export const ordersMock: Order[] = [
         }
       ],
       taxPixPercent: 0,
+    },
+    seller: {
+      name: "João Silva",
     },
     products: []
   }
