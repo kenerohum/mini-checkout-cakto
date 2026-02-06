@@ -1,7 +1,7 @@
 'use client';
 
 import Button from "@/components/button";
-import Card from "@/components/card";
+import Card from "@/layout/card";
 import MethodItem from "@/components/methodItem";
 import Product from "@/components/product";
 import Select from "@/components/select";

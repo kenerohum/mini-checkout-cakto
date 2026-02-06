@@ -55,3 +55,5 @@ Observações:
 Desenvolveria funcionalidades que melhorem a confiança do usuário, como prova social (avaliações, número de clientes), customização com logos e imagens/banners da loja, além de implementar indicadores de segurança (selos de confiança, HTTPS badge) e um resumo visual mais claro dos benefícios da compra.
 
 ## Link do PR
+
+https://github.com/kenerohum/mini-checkout-cakto/pull/1

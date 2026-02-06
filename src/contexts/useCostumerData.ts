@@ -17,17 +17,17 @@ type Store = {
     cardCVC?: string;
   },
   setError: (key: string, message: string) => void
-  validate: () => boolean;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  validate: (inputKey: string[]) => boolean;
+  inputChange: (key: string, valeu: string) => void;
 }
 
 const useCostumerData = create<Store>()((set, get) => ({
   costumerData: {
     cpf: '',
     email: '',
-    cardCVC : '',
-    cardExpiry : '',
-    cardNumber : ''
+    cardCVC: '',
+    cardExpiry: '',
+    cardNumber: ''
   },
   error: {},
   setError: (key: string, message: string) => {
@@ -84,16 +84,16 @@ const useCostumerData = create<Store>()((set, get) => ({
       }
       isValid = false;
     }
+
     set({ error });
     return isValid;
   },
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  inputChange: (key, valeu) => {
     set((prev) => ({
       ...prev,
       costumerData: {
         ...prev.costumerData,
-        [name]: value
+        [key]: valeu
       }
     }));
   }
