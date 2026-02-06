@@ -17,7 +17,7 @@ type Store = {
     cardCVC?: string;
   },
   setError: (key: string, message: string) => void
-  validate: (inputKey: string[]) => boolean;
+  validate: () => boolean;
   inputChange: (key: string, valeu: string) => void;
 }
 
