@@ -15,19 +15,7 @@ interface UserData {
 
 export default function Form() {
 
-    const { costumerData, error } = useCostumerData();
-
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        useCostumerData.setState((prev) => ({
-            ...prev,
-            costumerData: {
-                ...prev.costumerData,
-                [name]: value
-            }
-        }));
-    };
+    const { costumerData, error, handleInputChange } = useCostumerData();
 
     return (
         <div className="w-full  ">
@@ -35,7 +23,8 @@ export default function Form() {
             <div className="bg-secondary-background border-border-background border rounded-xl p-5 gap-4 flex flex-col">
                 <Input
                     id="email"
-                    placeholder="E-mail"
+                    placeholder="@"
+                    label="E-mail"
                     type="email"
                     name="email"
                     value={costumerData.email}
@@ -44,7 +33,8 @@ export default function Form() {
                 />
                 <Input
                     id="cpf"
-                    placeholder="CPF"
+                    placeholder="___.___.___-__"
+                    label="CPF"
                     mask="cpf"
                     name="cpf"
                     value={costumerData.cpf}

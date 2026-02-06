@@ -15,12 +15,10 @@ export default function Select({
     options, placeholder, className, ...props
 }: SelectProps) {
 
-
     return (
-
         <select
             className={twMerge([
-                "h-12 w-full border-border-background border rounded-lg px-3 py-2 gap-1 text-md text-foreground focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all bg-secondary-background ring-0 outline-0",
+                "h-12 w-full bg-background border-border-background appearance-none border-2 rounded-lg px-3 py-2 gap-1 text-md text-foreground focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all  ring-0 outline-0",
                 className
             ])}
             {...props}

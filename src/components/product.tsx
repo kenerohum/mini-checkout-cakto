@@ -13,7 +13,7 @@ export default function Product({ product }: ProductProps) {
             className="flex w-full items-center justify-between gap-4 text-foreground transition-colors "
         >
             <div className="flex items-center text-center gap-3">
-                <div className="flex items-center justify-center dark:bg-slate-800 h-10 min-w-12 rounded-lg" >
+                <div className="flex items-center justify-center dark:bg-slate-800 bg-slate-200 h-10 min-w-12 rounded-lg" >
                     <Lucide icon="ShoppingBag" className="" />
                 </div>
 

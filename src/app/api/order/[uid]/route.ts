@@ -33,8 +33,6 @@ export async function GET(request: Request, context: Context) {
       { status: 404 }
     );
   }
-
-  await new Promise(resolve => setTimeout(resolve, 2000));
   
   return NextResponse.json({
     order: { ...order, products }

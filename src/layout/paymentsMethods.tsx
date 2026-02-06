@@ -1,6 +1,7 @@
 'use client';
 
 import Button from "@/components/button";
+import Card from "@/components/card";
 import MethodItem from "@/components/methodItem";
 import Product from "@/components/product";
 import Select from "@/components/select";
@@ -35,7 +36,7 @@ export default function PaymentsMethods() {
             <h1 className="mb-3 text-lg font-bold">Métodos de pagamento</h1>
 
 
-            <div className="flex gap-2 mb-2">
+            <div className="flex gap-2 mb-4">
                 <MethodItem
                     title="Pix"
                     icon="Pix"
@@ -52,14 +53,17 @@ export default function PaymentsMethods() {
             </div>
 
             {paymentMethod == "card" &&
-                <div className="mb-2">
-                    <p className="text-md mb-1">Parcelamento</p>
-                    <Select
-                        className=""
-                        value={installment?.installmentNumber?.toString()}
-                        onChange={e => handlerSelectInstallment(Number(e.target.value))}
-                        options={order?.payment.installments.map(e => ({ label: `${e.installmentNumber}x ${formatCurrency(calcInstallment(amounts.totalProducts, e.installmentNumber, e.installmentTaxExtra).installmentValue)}`, value: e.installmentNumber?.toString() })) || []}
-                    />
+                <div className="bg-secondary-background border-border-background border rounded-xl p-5 mb-4">
+                    <Card />
+                    <div className="mb-4">
+                        <p className="text-md mb-1 font-medium">Parcelamento</p>
+                        <Select
+                            className=""
+                            value={installment?.installmentNumber?.toString()}
+                            onChange={e => handlerSelectInstallment(Number(e.target.value))}
+                            options={order?.payment.installments.map(e => ({ label: `${e.installmentNumber}x ${formatCurrency(calcInstallment(amounts.totalProducts, e.installmentNumber, e.installmentTaxExtra).installmentValue)}`, value: e.installmentNumber?.toString() })) || []}
+                        />
+                    </div>
                 </div>
             }
 
@@ -80,11 +84,11 @@ export default function PaymentsMethods() {
                                 value={formatCurrency(amounts.taxCakto)}
                             />
                             <div className="flex justify-between mb-2">
-                                <span className="text-lg whitespace-nowrap text-foreground">
+                                <span className="text-lg whitespace-nowrap text-foreground font-medium">
                                     Total
                                 </span>
                                 <span className="text-lg font-bold whitespace-nowrap text-foreground">
-                                    {formatCurrency(amounts.totalCostumer)}
+                                    {formatCurrency(amounts.totalProducts)}
                                 </span>
                             </div>
                         </div>
@@ -95,7 +99,7 @@ export default function PaymentsMethods() {
                                 <span className="text-md whitespace-nowrap text-primary font-medium">
                                     {order?.seller.name || "Vendedor"} receberá
                                 </span>
-                                <span className="text-md font-semibold whitespace-nowrap text-gray-300">
+                                <span className="text-md font-semibold whitespace-nowrap text-primary">
                                     {formatCurrency(amounts.sellerReceive)}
                                 </span>
                             </div>

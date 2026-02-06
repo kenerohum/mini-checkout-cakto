@@ -5,19 +5,29 @@ type Store = {
   costumerData: {
     cpf: string;
     email: string;
+    cardNumber: '',
+    cardExpiry: '',
+    cardCVC: ''
   };
   error: {
     cpf?: string;
     email?: string;
+    cardNumber?: string;
+    cardExpiry?: string;
+    cardCVC?: string;
   },
   setError: (key: string, message: string) => void
   validate: () => boolean;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const useCostumerData = create<Store>()((set, get) => ({
   costumerData: {
     cpf: '',
-    email: ''
+    email: '',
+    cardCVC : '',
+    cardExpiry : '',
+    cardNumber : ''
   },
   error: {},
   setError: (key: string, message: string) => {
@@ -30,7 +40,7 @@ const useCostumerData = create<Store>()((set, get) => ({
     }))
   },
   validate: () => {
-    const { costumerData, setError } = get();
+    const { costumerData } = get();
     let isValid = true;
 
     let error = {};
@@ -50,8 +60,42 @@ const useCostumerData = create<Store>()((set, get) => ({
       }
       isValid = false;
     }
-    set({error});
+
+    if (costumerData.cardNumber.replace(/\s/g, '').length < 16) {
+      error = {
+        ...error,
+        cardNumber: 'Número do cartão incompleto.'
+      }
+      isValid = false;
+    }
+
+    if (costumerData.cardExpiry.replace(/\s/g, '').length < 5) {
+      error = {
+        ...error,
+        cardExpiry: 'Data de validade incompleta.'
+      }
+      isValid = false;
+    }
+
+    if (costumerData.cardCVC.replace(/\s/g, '').length < 3) {
+      error = {
+        ...error,
+        cardCVC: 'CVC incompleto.'
+      }
+      isValid = false;
+    }
+    set({ error });
     return isValid;
+  },
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    set((prev) => ({
+      ...prev,
+      costumerData: {
+        ...prev.costumerData,
+        [name]: value
+      }
+    }));
   }
 }))
 

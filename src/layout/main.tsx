@@ -21,7 +21,7 @@ export default function Main({
     }, [order])
 
   return (
-    <div className="px-2 py-3 gap-5 flex flex-col">
+    <div className="px-2 py-5 gap-5 flex flex-col sm:w-150 mx-auto">
       <Cart />
       <Form/>
       <PaymentsMethods/>

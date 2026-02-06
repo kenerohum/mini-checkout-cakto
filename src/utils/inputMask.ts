@@ -26,6 +26,20 @@ export const MASKS = {
             return numericValue;
         }
     },
+    "card-number": (cardNumber: string): string => {
+        // Remove caracteres não numéricos para padronizar a entrada
+        const sanitized = cardNumber.replace(/\D/g, '');
+
+        // Divide o número em grupos de 4 dígitos
+        return sanitized.replace(/(\d{4})/g, '$1 ').trim();
+    },
+    "card-data": (date: string): string => {
+        // Remove caracteres não numéricos para padronizar a entrada
+        const sanitized = date.replace(/\D/g, '');
+
+        // Formata a data como 'AA/MM'
+        return sanitized.replace(/(\d{2})(\d{2})/, '$1/$2');
+    },
 };
 
 
