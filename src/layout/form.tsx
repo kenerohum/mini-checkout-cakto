@@ -6,6 +6,7 @@ import useCostumerData from "@/contexts/useCostumerData";
 import useOrder from "@/contexts/useOrder";
 import usePayment from "@/contexts/usePayment";
 import { calcTotal, formatCurrency } from "@/utils/calcAmount";
+import validateCPF from "@/utils/cpfValidator";
 import { useState } from "react";
 
 interface UserData {
@@ -15,7 +16,7 @@ interface UserData {
 
 export default function Form() {
 
-    const { costumerData, error, handleInputChange } = useCostumerData();
+    const { costumerData, error, inputChange, setError } = useCostumerData();
 
     return (
         <div className="w-full  ">
@@ -28,7 +29,15 @@ export default function Form() {
                     type="email"
                     name="email"
                     value={costumerData.email}
-                    onChange={handleInputChange}
+                    onChange={(e) => {
+                        if (!e.target.value || !/\S+@\S+\.\S+/.test(e.target.value)) {
+                            setError("email", 'Por favor, insira um e-mail válido.')
+                        }
+                        else{
+                            setError("email", '')
+                        }
+                        inputChange("email", e.target.value)
+                    }}
                     error={error?.email}
                 />
                 <Input
@@ -38,7 +47,15 @@ export default function Form() {
                     mask="cpf"
                     name="cpf"
                     value={costumerData.cpf}
-                    onChange={handleInputChange}
+                    onChange={(e) => {
+                        if (validateCPF(e.target.value) === false) {
+                            setError("cpf", 'Por favor, insira um CPF válido.')
+                        }
+                        else{
+                            setError("cpf", '')
+                        }
+                        inputChange("cpf", e.target.value)
+                    }}
                     error={error?.cpf}
                 />
             </div>
